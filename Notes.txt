@@ -1,0 +1,124 @@
+Notes on data
+
+Predicting the housing price
+
+Hypothesis
+	- area that the house is located
+	- number of rooms
+	- condition of the house
+	- market conditions
+	- age of house
+
+Actual data
+	- area that the house is located
+	- number of rooms
+	- condition of the house
+	- market conditions
+	- age of house
+	'1stFlrSF', '2ndFlrSF', '3SsnPorch', 'Alley', 'BedroomAbvGr',
+       'BldgType', 'BsmtCond', 'BsmtExposure', 'BsmtFinSF1', 'BsmtFinSF2',
+       'BsmtFinType1', 'BsmtFinType2', 'BsmtFullBath', 'BsmtHalfBath',
+       'BsmtQual', 'BsmtUnfSF', 'CentralAir', 'Condition1', 'Condition2',
+       'Electrical', 'EnclosedPorch', 'ExterCond', 'ExterQual', 'Exterior1st',
+       'Exterior2nd', 'Fence', 'FireplaceQu', 'Fireplaces', 'Foundation',
+       'FullBath', 'Functional', 'GarageArea', 'GarageCars', 'GarageCond',
+       'GarageFinish', 'GarageQual', 'GarageType', 'GarageYrBlt', 'GrLivArea',
+       'HalfBath', 'Heating', 'HeatingQC', 'HouseStyle', 'Id', 'KitchenAbvGr',
+       'KitchenQual', 'LandContour', 'LandSlope', 'LotArea', 'LotConfig',
+       'LotFrontage', 'LotShape', 'LowQualFinSF', 'MSSubClass', 'MSZoning',
+       'MasVnrArea', 'MasVnrType', 'MiscFeature', 'MiscVal', 'MoSold',
+       'Neighborhood', 'OpenPorchSF', 'OverallCond', 'OverallQual',
+       'PavedDrive', 'PoolArea', 'PoolQC', 'RoofMatl', 'RoofStyle',
+       'SaleCondition', 'SalePrice', 'SaleType', 'ScreenPorch', 'Street',
+       'TotRmsAbvGrd', 'TotalBsmtSF', 'Utilities', 'WoodDeckSF', 'YearBuilt',
+       'YearRemodAdd', 'YrSold'
+
+Interesting Uni analysis
+	- 2nd floor has alot of zeroes make a second col that is has second floor and remove zeroes
+	- 3SsnPorch (three season porch area)
+		can be binned probs none, small, medium, large, very large (0, <130, <200, <275, >275) 
+	- BedroomAbvGr
+		make catagorical potentialy
+	-BlgType (type of dwelling)
+		could be turned into 1fam and other as 1fam is %90
+	- BsmtCond (basment condition) 
+		%90 TA
+	- BsmtExposure
+		%80 no
+
+First pass plan alot of variables can be grouped together as they only apply to small % of properties
+
+Basic model features
+	- Area(combined floors)
+		'1stFlrSF' + '2ndFlrSF'
+	- Number of floors
+
+	- Has Basment
+		'BsmtCond', 'BsmtExposure', 'BsmtFinSF1', 'BsmtFinSF2',
+       'BsmtFinType1', 'BsmtFinType2', 'BsmtFullBath', 'BsmtHalfBath',
+       'BsmtQual', 'BsmtUnfSF',
+	- Transport
+		'Condition1', 'Condition2'
+	- Exterior
+		'ExterCond', 'ExterQual', 'Exterior1st',
+       'Exterior2nd',
+    -Garage
+    	'GarageArea', 'GarageCars', 'GarageCond',
+       'GarageFinish', 'GarageQual', 'GarageType', 'GarageYrBlt', 'GrLivArea',
+    -Bathrooms
+    	'FullBath' 'HalfBath'
+    -Lot
+    	'LandContour', 'LandSlope', 'LotArea', 'LotConfig',
+       'LotFrontage', 'LotShape', 'LowQualFinSF',
+    - Pool
+    	'PoolArea', 'PoolQC',
+    - Drive
+
+    -sale_conditions
+
+after 2 factor comparison which are the obvious ones
+	1st floor area
+	2nd floor area
+	Alley
+	Bedroom above ground
+	building type
+	BsmtCond
+	BsmtExposure
+	BsmtFinType
+	BsmtFullBath
+	BsmtHalfBath
+	BsmtQual
+	Central air
+	ExterQual
+	Exterior1st
+	Exterior2nd
+	Fireplaces
+	Foundation
+	FullBath
+	GarageArea
+	GarageCars
+	GarageFinish
+	GarageType
+	GrLivArea
+	HalfBath
+	HeatingQC
+	HouseStyle
+	KitchenAbvGr
+	KitchenQual
+	LotFrontage
+	LotShape
+	MSSubClass
+	MSZoning
+	MasVnrType
+	MoSold
+	Neighborhood
+	OverallCond
+	OverallQual
+	RoofStyle
+	SaleCondition
+	TotRmsAbvGrd
+	TotalBsmtSF
+	YearBuilt
+	YrSold
+
+That cut down to 41 features
